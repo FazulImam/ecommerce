@@ -1,2 +1,34 @@
+```
+# Dependencies
 node_modules/
-config/config.env
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# Logs
+*.log
+
+# Build artifacts
+dist/
+build/
+*.js.map
+
+# Cache
+.nyc_output/
+coverage/
+.npm/
+.yarn/
+
+# OS generated
+.DS_Store
+Thumbs.db
+```
