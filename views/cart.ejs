@@ -1,0 +1,54 @@
+<%- include('includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <%- include('includes/navigation.ejs') %>
+
+    <main>
+        <h1>Your Shopping Cart</h1>
+        <% if (cart && cart.products && cart.products.length > 0) { %>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let item of cart.products) { %>
+                        <tr>
+                            <td><%= item.productId %></td>
+                            <td>$<%= item.price.toFixed(2) %></td>
+                            <td><%= item.quantity %></td>
+                            <td>$<%= (item.price * item.quantity).toFixed(2) %></td>
+                            <td>
+                                <form action="/cart-delete" method="POST" style="display: inline;">
+                                    <input type="hidden" name="productId" value="<%= item.productId %>">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><strong>Total:</strong></td>
+                        <td><strong>$<%= cart.totalPrice.toFixed(2) %></strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+            
+            <div class="cart-actions">
+                <a href="/checkout" class="btn">Proceed to Checkout</a>
+            </div>
+        <% } else { %>
+            <h3>Your cart is empty!</h3>
+            <a href="/" class="btn">Continue Shopping</a>
+        <% } %>
+    </main>
+<%- include('includes/end.ejs') %>

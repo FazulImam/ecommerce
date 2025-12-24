@@ -1,6 +1,6 @@
 const path = require("path");
-
 const express = require("express");
+const session = require('express-session');
 // Use express.json() instead of body-parser for better performance
 const env = require("dotenv");
 
@@ -10,6 +10,13 @@ const {get404} = require("./controllers/error");
 
 const app = express();
 env.config({path:'./config/config.env'});
+
+// Configure session middleware
+app.use(session({
+  secret: 'my secret',
+  resave: false,
+  saveUninitialized: false
+}));
 
 // Use express.json() and express.urlencoded() directly for better performance
 app.use(express.urlencoded({extended : false}));
